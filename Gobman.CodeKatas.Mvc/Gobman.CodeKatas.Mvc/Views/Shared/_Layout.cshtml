@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <div class="collapse navbar-collapse" id="navbarSupportContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+	                @Html.ActionLink("Home", "Index", "Default", new { area = "" }, new { @class = "navbar-brand" })
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container body-content">
+        <div class="row">
+            <div class="col">
+                @RenderBody()
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <hr />
+                <footer>
+                    @RenderSection("Footer", required: false)
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

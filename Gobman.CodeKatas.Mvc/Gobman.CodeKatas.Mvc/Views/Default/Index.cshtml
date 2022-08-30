@@ -1,0 +1,41 @@
+﻿@model Gobman.CodeKatas.Mvc.Models.DefaultModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section Footer
+{
+    @Html.Action("Footer", new { pageName = "Home" })
+}
+
+<h1>@Model.IntroText</h1>
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-dark" role="alert">
+        @Model.Message
+    </div>
+}
+
+@foreach (var personCarrier in Model.PersonList)
+{
+<div class="row">
+    <div class="col">
+        <address>
+            <strong>@personCarrier.FirstName @personCarrier.LastName</strong><br>
+            @if (personCarrier.Address != null)
+            {
+                @personCarrier.Address.StreetAddress1<br>
+                @personCarrier.Address.PostalCode @personCarrier.Address.City<br>
+            }
+        </address>
+    </div>
+    <div class="col">
+        <abbr title="Phone">P:</abbr> @personCarrier.PhoneNumber
+    </div>
+    <div class="col-1">
+        @Html.ActionLink("Edit", "EditPerson", new { personId = personCarrier.PersonId})
+    </div>
+</div>
+}
