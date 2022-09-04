@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Web;
 using System.Web.Mvc;
+using Gobman.CodeKatas.Abstractions.Contracts;
 using Gobman.CodeKatas.Abstractions.Services;
+using Gobman.CodeKatas.Database;
+using Gobman.CodeKatas.Implementation.Services;
 using Gobman.CodeKatas.Mvc.Models;
 
 namespace Gobman.CodeKatas.Mvc.Controllers
@@ -13,6 +16,7 @@ namespace Gobman.CodeKatas.Mvc.Controllers
         public DefaultController(IPersonService personService)
         {
             _personService = personService;
+
         }
 
         [Route]
@@ -45,6 +49,29 @@ namespace Gobman.CodeKatas.Mvc.Controllers
 
             return View(model);
         }
+
+
+
+
+        [HttpPost]
+        [Route("Person/Edit")]
+        public ActionResult Edit(PersonCarrier model)
+        {
+            try
+            {
+                var person = _personService;
+                person.Update(model);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
+
+
 
         [Route("Footer")]
         [ChildActionOnly]

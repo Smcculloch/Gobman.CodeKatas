@@ -1,14 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using Gobman.CodeKatas.Abstractions.Contracts;
 using Gobman.CodeKatas.Abstractions.Services;
 using Gobman.CodeKatas.Database;
+using System.Configuration;
 
 namespace Gobman.CodeKatas.Implementation.Services
 {
     public class PersonService : IPersonService
     {
+        private SqlConnection con;
+        private void connection()
+        {
+            string constring = ConfigurationManager.ConnectionStrings["GobmanCodeKatas"].ToString();
+            con = new SqlConnection(constring);
+        }
         private readonly KataContext _context;
 
         public PersonService(KataContext context)
@@ -33,8 +43,25 @@ namespace Gobman.CodeKatas.Implementation.Services
             throw new NotImplementedException();
         }
 
-        public void Update(PersonCarrier carrier)
+        public bool Update(PersonCarrier carrier)
         {
+            connection();
+            SqlCommand cmd = new SqlCommand("UpdatePerson", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@PersonId", carrier.PersonId);
+            cmd.Parameters.AddWithValue("@FirstN", carrier.FirstName);
+            cmd.Parameters.AddWithValue("@LastN", carrier.LastName);
+            cmd.Parameters.AddWithValue("@PhoneN", carrier.PhoneNumber);
+            con.Open();
+            int i = cmd.ExecuteNonQuery();
+            con.Close();
+
+            if (i >= 1)
+                return true;
+            else
+                return false;
+
             throw new NotImplementedException();
         }
 
