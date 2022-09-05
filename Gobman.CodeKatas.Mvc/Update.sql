@@ -1,4 +1,4 @@
-﻿Create procedure [dbo].[UpdatePerson]  
+Create procedure [dbo].[Update]  
 (  
    @FirstN nvarchar (200),  
    @LastN nvarchar (200),  
