@@ -4,7 +4,6 @@ using System.Web.Mvc;
 using Gobman.CodeKatas.Abstractions.Contracts;
 using Gobman.CodeKatas.Abstractions.Services;
 using Gobman.CodeKatas.Database;
-using Gobman.CodeKatas.Implementation.Services;
 using Gobman.CodeKatas.Mvc.Models;
 
 namespace Gobman.CodeKatas.Mvc.Controllers
@@ -61,6 +60,44 @@ namespace Gobman.CodeKatas.Mvc.Controllers
             {
                 var person = _personService;
                 person.Update(model);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [Route("Person/Create")]
+        [HttpGet]
+        public ActionResult CreatePerson(Guid personId)
+        { 
+            return View();
+        }
+
+
+        [Route("Person/Create")]
+        [HttpPost]
+        public ActionResult CreatePerson([Bind] PersonCarrier model)
+        {
+            try
+            {
+                var person = _personService;
+                person.Create(model);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Delete(Guid personId)
+        {
+            try
+            {
+                var person = _personService;
+                person.Delete(personId);
                 return RedirectToAction("Index");
             }
             catch

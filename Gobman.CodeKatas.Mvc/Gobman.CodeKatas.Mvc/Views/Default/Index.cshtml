@@ -20,22 +20,32 @@
 
 @foreach (var personCarrier in Model.PersonList)
 {
-<div class="row">
-    <div class="col">
-        <address>
-            <strong>@personCarrier.FirstName @personCarrier.LastName</strong><br>
-            @if (personCarrier.Address != null)
-            {
-                @personCarrier.Address.StreetAddress1<br>
-                @personCarrier.Address.PostalCode @personCarrier.Address.City<br>
-            }
-        </address>
+    <div class="row">
+        <div class="col">
+            <address>
+                <strong>@personCarrier.FirstName @personCarrier.LastName</strong><br>
+                @if (personCarrier.Address != null)
+                {
+                    @personCarrier.Address.StreetAddress1<br>
+                    @personCarrier.Address.PostalCode @personCarrier.Address.City<br>
+                }
+            </address>
+        </div>
+        <div class="col">
+            <abbr title="Phone">P:</abbr> @personCarrier.PhoneNumber
+        </div>
+        <div class="col-1">
+            @Html.ActionLink("Edit", "EditPerson", new { personId = personCarrier.PersonId })
+            @Html.ActionLink("Delete", "Delete", new { personId = personCarrier.PersonId }, new { onclick = "return confirm('Are sure wants to delete?');" })
+        </div>
     </div>
-    <div class="col">
-        <abbr title="Phone">P:</abbr> @personCarrier.PhoneNumber
-    </div>
-    <div class="col-1">
-        @Html.ActionLink("Edit", "EditPerson", new { personId = personCarrier.PersonId})
-    </div>
-</div>
 }
+
+
+@if (string.IsNullOrEmpty(Model.Message))
+{
+    Guid g = Guid.NewGuid();
+
+    @Html.ActionLink("Create", "CreatePerson", new { personId = g })
+}
+
