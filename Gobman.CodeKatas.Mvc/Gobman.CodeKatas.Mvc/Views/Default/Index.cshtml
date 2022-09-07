@@ -36,7 +36,7 @@
         </div>
         <div class="col-1">
             @Html.ActionLink("Edit", "EditPerson", new { personId = personCarrier.PersonId })
-            @Html.ActionLink("Delete", "Delete", new { personId = personCarrier.PersonId }, new { onclick = "return confirm('Are sure wants to delete?');" })
+            @Html.ActionLink("Delete", "DeletePerson", new { personId = personCarrier.PersonId })
         </div>
     </div>
 }

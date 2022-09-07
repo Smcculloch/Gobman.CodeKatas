@@ -269,6 +269,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Default\EditPerson.cshtml" />
     <Content Include="Views\Default\CreatePerson.cshtml" />
+    <Content Include="Views\Default\DeletePerson.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />

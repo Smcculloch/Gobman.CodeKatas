@@ -1,13 +1,7 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Gobman.CodeKatas.Mvc",
-    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Implementation",
-    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Implementation\\Services",
-    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Mvc",
-    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Mvc\\Controllers",
-    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Mvc\\Views",
-    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Mvc\\Views\\Default"
+    "\\Gobman.CodeKatas.Mvc"
   ],
   "SelectedNode": "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Mvc.sln",
   "PreviewInSolutionExplorer": false

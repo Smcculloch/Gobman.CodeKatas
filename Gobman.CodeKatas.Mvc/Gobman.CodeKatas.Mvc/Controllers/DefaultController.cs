@@ -88,10 +88,30 @@ namespace Gobman.CodeKatas.Mvc.Controllers
             }
             catch
             {
-                return View();
+                //This should be "return View()" but it doesn't work for me unless I have it on both try/catch. 
+                return RedirectToAction("Index");
             }
         }
 
+        [Route("Person/Delete")]
+        [HttpGet]
+        public ActionResult DeletePerson(Guid personId)
+        {
+            var person = _personService.Get(personId);
+
+            var model = new PersonModel
+            {
+                PersonId = personId,
+                FirstName = person.FirstName,
+                LastName = person.LastName,
+                PhoneNumber = person.PhoneNumber
+            };
+            return View(model);
+        }
+
+
+        [Route("Person/Delete")]
+        [HttpPost]
         public ActionResult Delete(Guid personId)
         {
             try
@@ -102,11 +122,10 @@ namespace Gobman.CodeKatas.Mvc.Controllers
             }
             catch
             {
-                return View();
+                //This should be "return View()" but it doesn't work for me unless I have it on both try/catch. 
+                return RedirectToAction("Index");
             }
         }
-
-
 
 
 
