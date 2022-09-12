@@ -8,17 +8,14 @@ using Gobman.CodeKatas.Abstractions.Contracts;
 using Gobman.CodeKatas.Abstractions.Services;
 using Gobman.CodeKatas.Database;
 using System.Configuration;
+using System.Data.Entity.Migrations;
+using System.Threading;
 
 namespace Gobman.CodeKatas.Implementation.Services
 {
     public class PersonService : IPersonService
     {
-        private SqlConnection con;
-        private void connection()
-        {
-            string constring = ConfigurationManager.ConnectionStrings["GobmanCodeKatas"].ToString();
-            con = new SqlConnection(constring);
-        }
+
         private readonly KataContext _context;
 
         public PersonService(KataContext context)
@@ -40,61 +37,43 @@ namespace Gobman.CodeKatas.Implementation.Services
 
         public Guid Create(PersonCarrier carrier)
         {
-            connection();
-            Guid g = Guid.NewGuid();
-            carrier.PersonId = g;
+            var person = new Person
+            {
+                PersonId = Guid.NewGuid(),
+                FirstName = carrier.FirstName,
+                LastName = carrier.LastName,
+                PhoneNumber = carrier.PhoneNumber
+            };
 
-            SqlCommand cmd = new SqlCommand("Create", con);
-            cmd.CommandType = CommandType.StoredProcedure;
+            _context.Persons.Add(person);
+            _context.SaveChanges();
 
-            cmd.Parameters.AddWithValue("@PersonId", carrier.PersonId);
-            cmd.Parameters.AddWithValue("@FirstN", carrier.FirstName);
-            cmd.Parameters.AddWithValue("@LastN", carrier.LastName);
-            cmd.Parameters.AddWithValue("@PhoneN", carrier.PhoneNumber);
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
-
-            throw new NotImplementedException();
+            return person.PersonId;
         }
 
 
-        public bool Update(PersonCarrier carrier)
+        public void Update(PersonCarrier carrier)
         {
-            connection();
-            SqlCommand cmd = new SqlCommand("Update", con);
-            cmd.CommandType = CommandType.StoredProcedure;
+            var person = new Person
+            {
+                PersonId = carrier.PersonId,
+                FirstName = carrier.FirstName,
+                LastName = carrier.LastName,
+                PhoneNumber = carrier.PhoneNumber
+            };
 
-            cmd.Parameters.AddWithValue("@PersonId", carrier.PersonId);
-            cmd.Parameters.AddWithValue("@FirstN", carrier.FirstName);
-            cmd.Parameters.AddWithValue("@LastN", carrier.LastName);
-            cmd.Parameters.AddWithValue("@PhoneN", carrier.PhoneNumber);
-            con.Open();
-            int i = cmd.ExecuteNonQuery();
-            con.Close();
-
-            if (i >= 1)
-                return true;
-            else
-                return false;
-
-            throw new NotImplementedException();
+            _context.Persons.AddOrUpdate(person);
+            _context.SaveChanges();
         }
 
         public void Delete(Guid personId)
         {
-            connection();
-            SqlCommand cmd = new SqlCommand("Delete", con);
-            cmd.CommandType = CommandType.StoredProcedure;
+            var person = _context.Persons.Find(personId);   
 
-            cmd.Parameters.AddWithValue("@Id", personId);
-
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
-
-            throw new NotImplementedException();
+            _context.Persons.Remove(person);
+            _context.SaveChanges();
         }
+    
 
         public Guid CreateAddress(AddressCarrier carrier)
         {

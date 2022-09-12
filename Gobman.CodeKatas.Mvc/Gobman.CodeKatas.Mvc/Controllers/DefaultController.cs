@@ -15,7 +15,6 @@ namespace Gobman.CodeKatas.Mvc.Controllers
         public DefaultController(IPersonService personService)
         {
             _personService = personService;
-
         }
 
         [Route]
@@ -31,6 +30,7 @@ namespace Gobman.CodeKatas.Mvc.Controllers
 
             return View(model);
         }
+
 
         [Route("Person/Edit")]
         [HttpGet]
@@ -50,16 +50,13 @@ namespace Gobman.CodeKatas.Mvc.Controllers
         }
 
 
-
-
         [HttpPost]
         [Route("Person/Edit")]
-        public ActionResult Edit(PersonCarrier model)
+        public ActionResult EditPerson(PersonCarrier model)
         {
             try
             {
-                var person = _personService;
-                person.Update(model);
+                _personService.Update(model);
                 return RedirectToAction("Index");
             }
             catch
@@ -82,13 +79,11 @@ namespace Gobman.CodeKatas.Mvc.Controllers
         {
             try
             {
-                var person = _personService;
-                person.Create(model);
+                _personService.Create(model);
                 return RedirectToAction("Index");
             }
             catch
             {
-                //This should be "return View()" but it doesn't work for me unless I have it on both try/catch. 
                 return RedirectToAction("Index");
             }
         }
@@ -122,7 +117,6 @@ namespace Gobman.CodeKatas.Mvc.Controllers
             }
             catch
             {
-                //This should be "return View()" but it doesn't work for me unless I have it on both try/catch. 
                 return RedirectToAction("Index");
             }
         }

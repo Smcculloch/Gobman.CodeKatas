@@ -12,7 +12,7 @@ namespace Gobman.CodeKatas.Abstractions.Services
 
         Guid Create(PersonCarrier carrier);
 
-        bool Update(PersonCarrier carrier);
+        void Update(PersonCarrier carrier);
 
         void Delete(Guid personId);
 
