@@ -24,10 +24,17 @@
         <div class="col">
             <address>
                 <strong>@personCarrier.FirstName @personCarrier.LastName</strong><br>
-                @if (personCarrier.Address != null)
+                @if (personCarrier.Addresses != null)
                 {
-                    @personCarrier.Address.StreetAddress1<br>
-                    @personCarrier.Address.PostalCode @personCarrier.Address.City<br>
+                    for (var i = 0; i < personCarrier.Addresses.LongCount(); i++)
+                    {
+
+                        @Html.TextBox("Addresses[" + i + "].StreetAddress1", personCarrier.Addresses.ElementAt(i).StreetAddress1)<br />
+                        @Html.TextBox("Addresses[" + i + "].PostalCode", personCarrier.Addresses.ElementAt(i).PostalCode)<br />
+                        @Html.TextBox("Addresses[" + i + "].City", personCarrier.Addresses.ElementAt(i).City)<br />
+                        @Html.TextBox("Addresses[" + i + "].Country", personCarrier.Addresses.ElementAt(i).Country)<br />
+                        <br />
+                    }
                 }
             </address>
         </div>
@@ -35,8 +42,19 @@
             <abbr title="Phone">P:</abbr> @personCarrier.PhoneNumber
         </div>
         <div class="col-1">
-            @Html.ActionLink("Edit", "EditPerson", new { personId = personCarrier.PersonId })
-            @Html.ActionLink("Delete", "DeletePerson", new { personId = personCarrier.PersonId })
+            @Html.ActionLink("Edit", "EditPerson", new { personId = personCarrier.PersonId })<br /><br />
+            @Html.ActionLink("Delete", "DeletePerson", new { personId = personCarrier.PersonId })<br /><br />
+            @if (string.IsNullOrEmpty(Model.Message))
+            {
+                Guid c = Guid.NewGuid();
+                @Html.ActionLink("Address", "CreateAddress", new { personId = personCarrier.PersonId, AddressId = c })
+            }
+            <br /><br />
+            @for (var i = 0; i < personCarrier.Addresses.LongCount(); i++)
+            {
+                @Html.ActionLink("Remove", "RemoveAddress", new { addressId = personCarrier.Addresses.ElementAt(i).AddressId, personId = personCarrier.PersonId }, null)
+                <br />
+            }
         </div>
     </div>
 }
@@ -48,4 +66,5 @@
 
     @Html.ActionLink("Create", "CreatePerson", new { personId = g })
 }
+
 

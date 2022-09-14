@@ -71,10 +71,31 @@ namespace Gobman.CodeKatas.Implementation.Services
         }
     
 
-        public Guid CreateAddress(AddressCarrier carrier)
+        public Guid CreateAddress(AddressCarrier carrier, Guid personId)
         {
-            //Create only?
-            throw new NotImplementedException();
+            var address = new Address
+            {
+                AddressId = Guid.NewGuid(),
+                StreetAddress1 = carrier.StreetAddress1,
+                StreetAddress2 = carrier.StreetAddress2,
+                PostalCode = carrier.PostalCode,
+                City = carrier.City,
+                Country = carrier.Country,
+                PersonId = personId,
+            };
+
+            _context.Addresses.Add(address);
+            _context.SaveChanges();
+
+            return (Guid)carrier.AddressId;
+        }
+
+        public void DeleteAddress(Guid addressId)
+        {
+            var address = _context.Addresses.Find(addressId);
+
+            _context.Addresses.Remove(address);
+            _context.SaveChanges();
         }
 
         public void SetAddress(Guid personId, Guid addressId)

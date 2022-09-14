@@ -270,6 +270,8 @@
     <Content Include="Views\Default\EditPerson.cshtml" />
     <Content Include="Views\Default\CreatePerson.cshtml" />
     <Content Include="Views\Default\DeletePerson.cshtml" />
+    <Content Include="Views\Default\CreateAddress.cshtml" />
+    <Content Include="Views\Default\RemoveAddress.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -278,6 +280,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\FooterModel.cs" />
     <Compile Include="Models\DefaultModel.cs" />

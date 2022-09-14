@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Gobman.CodeKatas.Abstractions.Contracts;
@@ -10,6 +11,7 @@ namespace Gobman.CodeKatas.Mvc.Controllers
 {
     public class DefaultController: Controller
     {
+
         private readonly IPersonService _personService;
 
         public DefaultController(IPersonService personService)
@@ -121,6 +123,54 @@ namespace Gobman.CodeKatas.Mvc.Controllers
             }
         }
 
+        [Route("Address/Create")]
+        [HttpGet]
+        public ActionResult CreateAddress(Guid personId, Guid addressId)
+        {
+            return View();
+        }
+
+        [Route("Address/Create")]
+        [HttpPost]
+        public ActionResult Create([Bind] AddressCarrier model, Guid personId)
+        {
+            try
+            {
+                _personService.CreateAddress(model, personId);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+        [Route("Person/Remove")]
+        [HttpGet]
+        public ActionResult RemoveAddress()
+        { 
+            return View();
+        }
+
+
+        [Route("Person/Remove")]
+        [HttpPost]
+        public ActionResult Remove(Guid addressId, Guid personId)
+        {
+            try
+            {
+                var person = _personService.Get(personId);
+                
+                var address = person.Addresses.FirstOrDefault();
+                _personService.DeleteAddress(address.AddressId);
+                
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return RedirectToAction("Index");
+            }
+        }
 
 
         [Route("Footer")]
