@@ -7,13 +7,13 @@ namespace Gobman.CodeKatas.Database.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class test : IMigrationMetadata
+    public sealed partial class OnePersonToManyAddresses : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(test));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(OnePersonToManyAddresses));
         
         string IMigrationMetadata.Id
         {
-            get { return "202209121030529_test"; }
+            get { return "202209140734355_OnePersonToManyAddresses"; }
         }
         
         string IMigrationMetadata.Source

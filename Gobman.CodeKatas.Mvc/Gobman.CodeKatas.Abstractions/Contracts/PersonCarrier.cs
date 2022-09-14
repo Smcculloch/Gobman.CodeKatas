@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Gobman.CodeKatas.Abstractions.Contracts
 {
@@ -13,5 +14,7 @@ namespace Gobman.CodeKatas.Abstractions.Contracts
         public string PhoneNumber { get; set; }
 
         public AddressCarrier Address { get; set; }
+
+        public IEnumerable<AddressCarrier> Addresses { get; set; }
     }
 }

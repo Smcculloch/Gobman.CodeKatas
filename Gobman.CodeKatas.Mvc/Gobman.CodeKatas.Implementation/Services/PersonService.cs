@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using Gobman.CodeKatas.Abstractions.Contracts;
 using Gobman.CodeKatas.Abstractions.Services;
 using Gobman.CodeKatas.Database;
-using System.Configuration;
-using System.Data.Entity.Migrations;
-using System.Threading;
 
 namespace Gobman.CodeKatas.Implementation.Services
 {
@@ -48,7 +44,7 @@ namespace Gobman.CodeKatas.Implementation.Services
             _context.Persons.Add(person);
             _context.SaveChanges();
 
-            return person.PersonId;
+            return (Guid)person.PersonId;
         }
 
 
@@ -77,11 +73,14 @@ namespace Gobman.CodeKatas.Implementation.Services
 
         public Guid CreateAddress(AddressCarrier carrier)
         {
+            //Create only?
             throw new NotImplementedException();
         }
 
         public void SetAddress(Guid personId, Guid addressId)
         {
+            //What's this for?
+            //Using both person/address ID's.
             throw new NotImplementedException();
         }
 
@@ -89,21 +88,23 @@ namespace Gobman.CodeKatas.Implementation.Services
         {
             return new PersonCarrier
             {
-                PersonId = person.PersonId,
+                PersonId = (Guid)person.PersonId,
                 FirstName = person.FirstName,
                 LastName = person.LastName,
                 PhoneNumber = person.PhoneNumber,
-                Address = person.AddressId.HasValue
-                    ? new AddressCarrier
-                    {
-                        AddressId = person.Address.AddressId,
-                        StreetAddress1 = person.Address.StreetAddress1,
-                        StreetAddress2 = person.Address.StreetAddress2,
-                        PostalCode = person.Address.PostalCode,
-                        City = person.Address.City,
-                        Country = person.Address.Country
-                    }
-                    : null
+                Addresses = person.Addresses != null
+                    ? person.Addresses
+                            .Select(a => new AddressCarrier
+                            {
+                                AddressId = a.AddressId,
+                                StreetAddress1 = a.StreetAddress1,
+                                StreetAddress2 = a.StreetAddress2,
+                                PostalCode = a.PostalCode,
+                                City = a.City,
+                                Country = a.Country
+                            })
+                            .ToArray()
+                    : Array.Empty<AddressCarrier>()
             };
         }
     }

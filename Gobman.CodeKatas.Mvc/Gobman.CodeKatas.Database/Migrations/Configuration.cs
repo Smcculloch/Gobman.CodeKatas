@@ -21,32 +21,39 @@ namespace Gobman.CodeKatas.Database.Migrations
             var someoneElsePersonId = new Guid("42ef2656-23ee-4233-b700-fe0ce24c4766");
             var addressId = new Guid("dc75dd0c-b2d6-4601-b87b-c8f8b83113a9");
 
-            context.Addresses.AddOrUpdate(new Address
+            var address = new Address
             {
                 AddressId = addressId,
                 StreetAddress1 = "Trädgårdsgatan 5",
                 PostalCode = "553 16",
                 City = "Jönköping",
-                Country = "Sweden"
-            });
+                Country = "Sweden",
+                PersonId = personId,
+            };
 
-            context.Persons.AddOrUpdate(new Person
+            //Not useful? Already adding the collection via the person's? 
+            context.Addresses.AddOrUpdate(address);
+
+            var person = new Person
             {
                 PersonId = personId,
                 FirstName = "Stephen",
                 LastName = "McCulloch",
                 PhoneNumber = "0707887543",
-                AddressId = addressId
-            });
+                Addresses = new[] { address }
+            };
+            
+            context.Persons.AddOrUpdate(person);
 
-            context.Persons.AddOrUpdate(new Person
+            var person2 = new Person
             {
                 PersonId = someoneElsePersonId,
                 FirstName = "Anders",
                 LastName = "Johansson",
-                PhoneNumber = "0707654321",
-                AddressId = addressId
-            });
+                PhoneNumber = "0707654321"
+            };
+
+            context.Persons.AddOrUpdate(person2);
         }
     }
 }

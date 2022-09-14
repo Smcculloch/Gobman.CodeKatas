@@ -1,8 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Gobman.CodeKatas.Mvc"
+    "\\Gobman.CodeKatas.Mvc",
+    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Abstractions",
+    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Abstractions\\Contracts",
+    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Abstractions\\Properties",
+    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Abstractions\\Services",
+    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Database",
+    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Database\\Migrations",
+    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Implementation",
+    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Implementation\\Services"
   ],
-  "SelectedNode": "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Mvc.sln",
+  "SelectedNode": "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Database\\Migrations\\201901232043139_AllowPersonNullAddress.cs",
   "PreviewInSolutionExplorer": false
 }
