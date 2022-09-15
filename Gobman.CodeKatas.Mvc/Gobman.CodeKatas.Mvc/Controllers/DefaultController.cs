@@ -54,9 +54,13 @@ namespace Gobman.CodeKatas.Mvc.Controllers
 
         [HttpPost]
         [Route("Person/Edit")]
-        public ActionResult EditPerson(PersonCarrier model)
+        public ActionResult EditPerson(PersonCarrier model, PersonModel person)
         {
-            try
+            if (!ModelState.IsValid) //Check for validation errors
+            {
+                return View(person);
+            }
+                try
             {
                 _personService.Update(model);
                 return RedirectToAction("Index");

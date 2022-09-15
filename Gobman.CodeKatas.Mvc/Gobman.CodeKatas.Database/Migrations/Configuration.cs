@@ -46,7 +46,6 @@ namespace Gobman.CodeKatas.Database.Migrations
                 PersonId = personId,
             };
 
-            //Not useful? Already adding the collection via the person's? 
             context.Addresses.AddOrUpdate(address);
             context.Addresses.AddOrUpdate(address2);
 
