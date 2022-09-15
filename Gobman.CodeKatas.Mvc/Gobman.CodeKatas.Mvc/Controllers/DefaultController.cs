@@ -60,11 +60,13 @@ namespace Gobman.CodeKatas.Mvc.Controllers
             {
                 return View(person);
             }
-                try
+            
+            try
             {
                 _personService.Update(model);
                 return RedirectToAction("Index");
             }
+            
             catch
             {
                 return View();
@@ -74,15 +76,19 @@ namespace Gobman.CodeKatas.Mvc.Controllers
         [Route("Person/Create")]
         [HttpGet]
         public ActionResult CreatePerson(Guid personId)
-        { 
+        {
             return View();
         }
 
 
         [Route("Person/Create")]
         [HttpPost]
-        public ActionResult CreatePerson([Bind] PersonCarrier model)
+        public ActionResult CreatePerson([Bind] PersonCarrier model, PersonModel person)
         {
+            if (!ModelState.IsValid) //Check for validation errors
+            {
+                return View(person);
+            }
             try
             {
                 _personService.Create(model);
