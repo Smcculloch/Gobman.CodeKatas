@@ -61,6 +61,14 @@
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Configuration.ConfigurationBuilders.Base, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Configuration.ConfigurationBuilders.Base.2.0.0\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Configuration.ConfigurationBuilders.UserSecrets, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.2.0.0\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -174,6 +182,11 @@
     <Content Include="Scripts\jquery-3.5.1.min.js" />
     <Content Include="Scripts\jquery-3.5.1.slim.js" />
     <Content Include="Scripts\jquery-3.5.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -260,6 +273,10 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Default\EditPerson.cshtml" />
+    <Content Include="Views\Default\CreatePerson.cshtml" />
+    <Content Include="Views\Default\DeletePerson.cshtml" />
+    <Content Include="Views\Default\CreateAddress.cshtml" />
+    <Content Include="Views\Default\RemoveAddress.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -268,6 +285,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AddressModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\FooterModel.cs" />
     <Compile Include="Models\DefaultModel.cs" />

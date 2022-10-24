@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Gobman.CodeKatas.Mvc",
+    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Abstractions",
+    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Abstractions\\Services",
+    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Database",
+    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Database\\Migrations",
+    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Implementation",
+    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Implementation\\Services",
+    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Mvc",
+    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Mvc\\Views",
+    "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Mvc\\Views\\Default"
+  ],
+  "SelectedNode": "\\Gobman.CodeKatas.Mvc\\Gobman.CodeKatas.Mvc\\Views\\Default\\CreateAddress.cshtml",
+  "PreviewInSolutionExplorer": false
+}

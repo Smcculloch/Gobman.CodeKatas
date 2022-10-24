@@ -1,17 +1,16 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using Gobman.CodeKatas.Database;
 
-namespace Gobman.CodeKatas.Database
+namespace Gobman.CodeKatas.Mvc.Models
 {
-    public class Address
-    {
+    public class AddressModel
+    {   
         public Guid AddressId { get; set; }
 
         public Guid? PersonId { get; set; }
 
-        public virtual Person Person { get; set; } 
-        
+        public virtual Person Person { get; set; }
+
         public string StreetAddress1 { get; set; }
 
         public string StreetAddress2 { get; set; }

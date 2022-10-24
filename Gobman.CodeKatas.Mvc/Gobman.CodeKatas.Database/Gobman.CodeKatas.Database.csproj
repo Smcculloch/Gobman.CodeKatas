@@ -66,6 +66,10 @@
     <Compile Include="Migrations\201901232043139_AllowPersonNullAddress.Designer.cs">
       <DependentUpon>201901232043139_AllowPersonNullAddress.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202209140734355_OnePersonToManyAddresses.cs" />
+    <Compile Include="Migrations\202209140734355_OnePersonToManyAddresses.designer.cs">
+      <DependentUpon>202209140734355_OnePersonToManyAddresses.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,6 +87,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901232043139_AllowPersonNullAddress.resx">
       <DependentUpon>201901232043139_AllowPersonNullAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209140734355_OnePersonToManyAddresses.resx">
+      <DependentUpon>202209140734355_OnePersonToManyAddresses.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using Gobman.CodeKatas.Abstractions.Contracts;
 using Gobman.CodeKatas.Abstractions.Services;
@@ -9,6 +11,7 @@ namespace Gobman.CodeKatas.Implementation.Services
 {
     public class PersonService : IPersonService
     {
+
         private readonly KataContext _context;
 
         public PersonService(KataContext context)
@@ -30,26 +33,75 @@ namespace Gobman.CodeKatas.Implementation.Services
 
         public Guid Create(PersonCarrier carrier)
         {
-            throw new NotImplementedException();
+            var person = new Person
+            {
+                PersonId = Guid.NewGuid(),
+                FirstName = carrier.FirstName,
+                LastName = carrier.LastName,
+                PhoneNumber = carrier.PhoneNumber
+            };
+
+            _context.Persons.Add(person);
+            _context.SaveChanges();
+
+            return (Guid)person.PersonId;
         }
+
 
         public void Update(PersonCarrier carrier)
         {
-            throw new NotImplementedException();
+            var person = new Person
+            {
+                PersonId = carrier.PersonId,
+                FirstName = carrier.FirstName,
+                LastName = carrier.LastName,
+                PhoneNumber = carrier.PhoneNumber
+            };
+
+            _context.Persons.AddOrUpdate(person);
+            _context.SaveChanges();
         }
 
         public void Delete(Guid personId)
         {
-            throw new NotImplementedException();
+            var person = _context.Persons.Find(personId);   
+
+            _context.Persons.Remove(person);
+            _context.SaveChanges();
+        }
+    
+
+        public Guid CreateAddress(AddressCarrier carrier, Guid personId)
+        {
+            var address = new Address
+            {
+                AddressId = Guid.NewGuid(),
+                StreetAddress1 = carrier.StreetAddress1,
+                StreetAddress2 = carrier.StreetAddress2,
+                PostalCode = carrier.PostalCode,
+                City = carrier.City,
+                Country = carrier.Country,
+                PersonId = personId,
+            };
+
+            _context.Addresses.Add(address);
+            _context.SaveChanges();
+
+            return (Guid)carrier.AddressId;
         }
 
-        public Guid CreateAddress(AddressCarrier carrier)
+        public void DeleteAddress(Guid addressId)
         {
-            throw new NotImplementedException();
+            var address = _context.Addresses.Find(addressId);
+
+            _context.Addresses.Remove(address);
+            _context.SaveChanges();
         }
 
         public void SetAddress(Guid personId, Guid addressId)
         {
+            //What's this for?
+            //Using both person/address ID's.
             throw new NotImplementedException();
         }
 
@@ -57,21 +109,23 @@ namespace Gobman.CodeKatas.Implementation.Services
         {
             return new PersonCarrier
             {
-                PersonId = person.PersonId,
+                PersonId = (Guid)person.PersonId,
                 FirstName = person.FirstName,
                 LastName = person.LastName,
                 PhoneNumber = person.PhoneNumber,
-                Address = person.AddressId.HasValue
-                    ? new AddressCarrier
-                    {
-                        AddressId = person.Address.AddressId,
-                        StreetAddress1 = person.Address.StreetAddress1,
-                        StreetAddress2 = person.Address.StreetAddress2,
-                        PostalCode = person.Address.PostalCode,
-                        City = person.Address.City,
-                        Country = person.Address.Country
-                    }
-                    : null
+                Addresses = person.Addresses != null
+                    ? person.Addresses
+                            .Select(a => new AddressCarrier
+                            {
+                                AddressId = a.AddressId,
+                                StreetAddress1 = a.StreetAddress1,
+                                StreetAddress2 = a.StreetAddress2,
+                                PostalCode = a.PostalCode,
+                                City = a.City,
+                                Country = a.Country
+                            })
+                            .ToArray()
+                    : Array.Empty<AddressCarrier>()
             };
         }
     }

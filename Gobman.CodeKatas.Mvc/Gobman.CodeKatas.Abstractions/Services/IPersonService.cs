@@ -16,8 +16,10 @@ namespace Gobman.CodeKatas.Abstractions.Services
 
         void Delete(Guid personId);
 
-        Guid CreateAddress(AddressCarrier carrier);
+        Guid CreateAddress(AddressCarrier carrier, Guid personId);
 
         void SetAddress(Guid personId, Guid addressId);
+
+        void DeleteAddress(Guid addressId);
     }
 }
